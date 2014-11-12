@@ -31,7 +31,7 @@ Password: <input type="password" name="password" REQUIRED>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <input type="submit" value="Login" align="center" name="submitbtn" id="submitbtn">
 </form>
-<a href="#" name="forgetPass">Forget Password</a><br>
+<a href="./forgetPass.jsp" name="forgetPass">Forget Password</a><br>
 <a href="./signup.jsp" name="signUp">Sign up</a>
 </td>
 <!-- End of Navigation -->
