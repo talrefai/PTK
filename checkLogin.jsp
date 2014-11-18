@@ -39,50 +39,57 @@
 		List<String> lines = new ArrayList<String>();
 		FileReader fr = new FileReader(path);
 		BufferedReader bf = new BufferedReader(fr);
-		try {
-			String aLine;
-			while ((aLine = bf.readLine()) != null) {
-				if(aLine.contains(userid) && aLine.contains(pass))
-				{
-				lines.add(aLine);
-				}				
+		if(fr.exists() && !fr.isDirectory())
+		{
+			try {
+				String aLine;
+				while ((aLine = bf.readLine()) != null) {
+					if(aLine.contains(userid) && aLine.contains(pass))
+					{
+					lines.add(aLine);
+					}				
+				}
+			} finally 
+			{
+				bf.close();
 			}
-		} finally 
-		{
-			bf.close();
-		}
-		//System.out.println("Lines:" + lines + "\n");
-		StringBuilder comma = new StringBuilder();
-		for ( int i = 0; i< lines.size(); i++){
-			comma.append(lines.get(i));
+			//System.out.println("Lines:" + lines + "\n");
+			StringBuilder comma = new StringBuilder();
+			for ( int i = 0; i< lines.size(); i++){
+				comma.append(lines.get(i));
 
-			if ( i != lines.size()-1){
+				if ( i != lines.size()-1){
 
-			comma.append(",");
+				comma.append(",");
 
+				}
 			}
-		}
-		//System.out.println(comma.toString());	
-		String input = comma.toString();
-		String part[] = input.split(",");
-		if(userid.equals(part[0]) && pass.equals(part[1]))
-		{
-			ses.setAttribute("userID", userid);
-			%>
-			<H3>Login Success! </H3>
-			click on <a href="./home.jsp">Home Page</a> to continue...
-			<%
-		
-		}
-		else
-		{
-			%> 
-			<H3>Sorry entered either wrong username or password...</H3>
-			click on <a href="./index.jsp">Index</a> to try again...
-			<%
+			//System.out.println(comma.toString());	
+			String input = comma.toString();
+			String part[] = input.split(",");
+			if(userid.equals(part[0]) && pass.equals(part[1]))
+			{
+				ses.setAttribute("userID", userid);
+				%>
+				<H3>Login Success! </H3>
+				click on <a href="./home.jsp">Home Page</a> to continue...
+				<%
 			
+			}
+			else
+			{
+				%> 
+				<H3>Sorry entered either wrong username or password...</H3>
+				click on <a href="./index.jsp">Index</a> to try again...
+				<%
+			}
 		}
-		
+		else{
+			%> 
+				<H3>Sorry the file does not exists...</H3>
+				click on <a href="./index.jsp">Index</a> and make sure about the file...
+				<%
+		}
 %>
 </CENTER>
 

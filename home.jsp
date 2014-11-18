@@ -16,15 +16,22 @@
 <h1 align="center">PTK Social Media</h1>
 <%
 			HttpSession session1 = request.getSession();
-			String uss= session1.getAttribute("userID").toString();
-			if(session1.getAttribute("userID") != null){
-			 %>
-			welcome, <%= session1.getAttribute("userID") %><br>
-			<%
-				
-			}
-			else{
-			pageContext.forward("index.jsp");
+			//String uss= session1.getAttribute("userID").toString();
+			try{
+			
+				if(session1.getAttribute("userID") != null){
+				 %>
+				welcome, <%= session1.getAttribute("userID") %><br>
+				<%
+					
+				}
+				else{
+				pageContext.forward("index.jsp");
+				}
+			}catch (IndexOutOfBoundsException e) {
+				System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+			} catch (IOException e) {
+				System.err.println("Caught IOException: " + e.getMessage());
 			}
 %>
 <br>Search Users : <input type="text" value = "Enter name" />
